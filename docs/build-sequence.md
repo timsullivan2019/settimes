@@ -351,3 +351,27 @@ include no-lineup pairs**, or the weights get tuned only against easy cases.
 a distinct artist sharing a name, NOT a performance note. Step 8 artist resolution
 must key on RA's structured artist `id` first, falling back to name only when no id
 exists. Stripping the suffix and matching on name alone merges different people.
+
+---
+
+## Addendum — Step 8 revised criteria (2026-07-28)
+
+The original "≥85% of events resolve to a venue with non-null geog" was set before
+we knew NYC's venue coverage in OSM. Replaced with two separate metrics:
+
+- **Events linked to a venue record: 100%.** No event may lack a venue_id.
+- **Events with a usable point: ≥85% of events EXCLUDING address_secret ones.**
+  TBA/secret-location listings must NOT be geocoded (§9.1 rule 6). Counting them
+  as failures measures the wrong thing.
+
+**Finding:** roughly 30% of NYC venues in a 30-day RA window are absent from
+OpenStreetMap — SILO, Outer Heaven, Superior Ingredients, Silence Please, H0l0 Yard,
+Apollo Studio, rooftops and studios. These are precisely the underground spaces the
+project exists to surface. Expect a permanent hand-seeded tail; §16.2 anticipates it.
+
+**Never accept a non-POI geocode.** Verified failure modes: "SILO" → a residential
+street in Greenwich CT, "SOBs" → a footpath in NJ. Wrong coordinates are worse than
+null, because the radius filter fails silently.
+
+**Venue matching is not truly tested until Step 9,** when Dice names must resolve to
+venues RA already created. Seed `aliases` with real short forms.
