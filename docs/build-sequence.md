@@ -302,3 +302,19 @@ Step 3 blocks everything. Steps 9, 12, 13 are independent and can be reordered. 
 Accounts · auth · admin panel · dedupe review UI · promoter dashboard · date-conflict checker · Telegram/Discord/email ingestion · flyer parsing · Shotgun/Ticketmaster/SeatGeek · alerts or digests · artist follows · analytics beyond `ingest_runs` · multi-city · iOS.
 
 Everything above is either deliberately cut or a later phase (§5.3, §5.4).
+
+---
+
+## Addendum — Step 5 extra verification
+
+After the first ingest run, JS and Postgres must agree on `party_night`.
+Both compute it correctly in isolation; nothing yet proves they agree.
+
+```sql
+select count(*) from events
+where party_night
+   <> ((starts_at at time zone 'America/New_York') - interval '6 hours')::date;
+```
+
+Must return 0. Non-zero means `lib/time.ts` and the SQL definition have
+drifted — fix before proceeding, since every dedupe candidate set depends on it.
