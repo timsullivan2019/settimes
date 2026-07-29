@@ -54,6 +54,9 @@ hardcoded spike date — the adapter must compute the date at runtime).
   midnight, which renders as the PREVIOUS evening in America/New_York.
 - Always select it as `party_night::text` and treat it as a string. Never let a
   `Date` object represent a party night anywhere in the app.
+- On raw `db.execute`, the postgres-js driver returns `timestamptz` as a STRING
+  (`"2026-07-28 23:00:00+00"`), not a Date. Never assume a driver's return type —
+  log the typeof once before writing conversion logic.
 
 ## Data integrity
 - Every adapter validates its output with Zod. Parse failure throws with the
