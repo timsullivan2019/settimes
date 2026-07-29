@@ -18,6 +18,18 @@ const runners: Record<string, () => Promise<NormalEvent[]>> = {
       },
     });
   },
+  dice: async () => {
+    const { fetchEvents } = await import("../adapters/dice");
+    return fetchEvents({
+      onPage: (page, raw) => {
+        if (page === 1 && !existsSync("fixtures/dice-sample.json")) {
+          mkdirSync("fixtures", { recursive: true });
+          writeFileSync("fixtures/dice-sample.json", `${JSON.stringify(raw, null, 2)}\n`);
+          console.log("saved fixtures/dice-sample.json");
+        }
+      },
+    });
+  },
 };
 
 async function main(): Promise<void> {
