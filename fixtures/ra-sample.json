@@ -1,0 +1,539 @@
+{
+  "data": {
+    "eventListingsWithBumps": {
+      "eventListings": {
+        "data": [
+          {
+            "id": "12475842",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2475842",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T19:00:00.000",
+              "endTime": "2026-07-29T02:00:00.000",
+              "title": "Open Decks with STEEN and LIFE AFTER TRANCE",
+              "contentUrl": "/events/2475842",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "207254",
+                "name": "SILO",
+                "contentUrl": "/clubs/207254"
+              },
+              "artists": [
+                {
+                  "id": "95292",
+                  "name": "STEEN"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12480082",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2480082",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T22:00:00.000",
+              "endTime": "2026-07-29T04:00:00.000",
+              "title": "The Hardest Techno [MISS TOXIN EP RELEASE]",
+              "contentUrl": "/events/2480082",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "71292",
+                "name": "Bossa Nova Civic Club",
+                "contentUrl": "/clubs/71292"
+              },
+              "artists": [
+                {
+                  "id": "105111",
+                  "name": "Vyper"
+                },
+                {
+                  "id": "104235",
+                  "name": "HARDKORE"
+                },
+                {
+                  "id": "127298",
+                  "name": "CRYFXB"
+                },
+                {
+                  "id": "140192",
+                  "name": "Rapture"
+                },
+                {
+                  "id": "149438",
+                  "name": "Djgothqueen (3)"
+                },
+                {
+                  "id": "160194",
+                  "name": "MiGS718"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12498534",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2498534",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T22:00:00.000",
+              "endTime": "2026-07-29T03:00:00.000",
+              "title": "starstruck: v64, kyxm, JAV/",
+              "contentUrl": "/events/2498534",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "108513",
+                "name": "Happyfun Hideaway",
+                "contentUrl": "/clubs/108513"
+              },
+              "artists": [
+                {
+                  "id": "148260",
+                  "name": "kyxm"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12480095",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2480095",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T19:00:00.000",
+              "endTime": "2026-07-28T22:00:00.000",
+              "title": "Happy Hour: degrassi with seth reverie & 2cj",
+              "contentUrl": "/events/2480095",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "71292",
+                "name": "Bossa Nova Civic Club",
+                "contentUrl": "/clubs/71292"
+              },
+              "artists": []
+            }
+          },
+          {
+            "id": "12493615",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2493615",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T20:00:00.000",
+              "endTime": "2026-07-29T04:00:00.000",
+              "title": "Ladies Night SUMMER NIGHTS START HERE",
+              "contentUrl": "/events/2493615",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "297871",
+                "name": "Tacoshi",
+                "contentUrl": "/clubs/297871"
+              },
+              "artists": [
+                {
+                  "id": "103120",
+                  "name": "P La Cangri"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12499508",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2499508",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T22:00:00.000",
+              "endTime": "2026-07-29T04:00:00.000",
+              "title": "REGGAE TUESDAYS",
+              "contentUrl": "/events/2499508",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "15664",
+                "name": "Bembe",
+                "contentUrl": "/clubs/15664"
+              },
+              "artists": [
+                {
+                  "id": "21565",
+                  "name": "Liondub"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12496902",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2496902",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T19:00:00.000",
+              "endTime": "2026-07-28T23:00:00.000",
+              "title": "Deep Listening",
+              "contentUrl": "/events/2496902",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "250960",
+                "name": "Moondog Hifi",
+                "contentUrl": "/clubs/250960"
+              },
+              "artists": []
+            }
+          },
+          {
+            "id": "12499486",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2499486",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T23:59:00.000",
+              "endTime": "2026-07-29T04:00:00.000",
+              "title": "DJ Awesome",
+              "contentUrl": "/events/2499486",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "101190",
+                "name": "Shrine",
+                "contentUrl": "/clubs/101190"
+              },
+              "artists": []
+            }
+          },
+          {
+            "id": "12494722",
+            "listingDate": "2026-07-28T00:00:00.000",
+            "event": {
+              "id": "2494722",
+              "date": "2026-07-28T00:00:00.000",
+              "startTime": "2026-07-28T19:00:00.000",
+              "endTime": "2026-07-28T23:00:00.000",
+              "title": "Música For Venezuela: Benefit Concert Supporting Venezuela",
+              "contentUrl": "/events/2494722",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "8591",
+                "name": "SOBs",
+                "contentUrl": "/clubs/8591"
+              },
+              "artists": []
+            }
+          },
+          {
+            "id": "12499454",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2499454",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T13:00:00.000",
+              "endTime": "2026-07-29T14:00:00.000",
+              "title": "Deep Dive: Dean Blunt",
+              "contentUrl": "/events/2499454",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "267250",
+                "name": "Silence Please",
+                "contentUrl": "/clubs/267250"
+              },
+              "artists": []
+            }
+          },
+          {
+            "id": "12483250",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2483250",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T17:30:00.000",
+              "endTime": "2026-07-29T21:00:00.000",
+              "title": "QUEER NIGHT @ CUL DE SAC",
+              "contentUrl": "/events/2483250",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "277643",
+                "name": "La Plaza Cultural",
+                "contentUrl": "/clubs/277643"
+              },
+              "artists": []
+            }
+          },
+          {
+            "id": "12480706",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2480706",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T19:00:00.000",
+              "endTime": "2026-07-30T23:00:00.000",
+              "title": "FOREPLAY BY SOUTH BROOKLYN SAPPHIC",
+              "contentUrl": "/events/2480706",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "253128",
+                "name": "Loafers Cocktail Bar",
+                "contentUrl": "/clubs/253128"
+              },
+              "artists": []
+            }
+          },
+          {
+            "id": "12488859",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2488859",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T22:00:00.000",
+              "endTime": "2026-07-30T02:00:00.000",
+              "title": "House of FLINTA*",
+              "contentUrl": "/events/2488859",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "141852",
+                "name": "Mood Ring",
+                "contentUrl": "/clubs/141852"
+              },
+              "artists": [
+                {
+                  "id": "129044",
+                  "name": "KIMKILLA"
+                },
+                {
+                  "id": "183233",
+                  "name": "Seo (US)"
+                },
+                {
+                  "id": "166069",
+                  "name": "niko the nuisance"
+                },
+                {
+                  "id": "168288",
+                  "name": "Cow Tools"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12475843",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2475843",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T19:00:00.000",
+              "endTime": "2026-07-30T02:00:00.000",
+              "title": "Open Decks with STEEN and Kush Jones [Full Venue Edition]",
+              "contentUrl": "/events/2475843",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "207254",
+                "name": "SILO",
+                "contentUrl": "/clubs/207254"
+              },
+              "artists": [
+                {
+                  "id": "95292",
+                  "name": "STEEN"
+                },
+                {
+                  "id": "81802",
+                  "name": "Kush Jones"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12495640",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2495640",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T18:00:00.000",
+              "endTime": "2026-07-29T22:00:00.000",
+              "title": "WADADA by Ayanna Heaven",
+              "contentUrl": "/events/2495640",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "36873",
+                "name": "Le Bain",
+                "contentUrl": "/clubs/36873"
+              },
+              "artists": [
+                {
+                  "id": "105571",
+                  "name": "Ayanna Heaven"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12491036",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2491036",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T22:00:00.000",
+              "endTime": "2026-07-30T04:00:00.000",
+              "title": "HEADS KNOW FUNDRAISER: DJ Voices / MoMA Ready / Sheepshead / Sister Zo",
+              "contentUrl": "/events/2491036",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "71292",
+                "name": "Bossa Nova Civic Club",
+                "contentUrl": "/clubs/71292"
+              },
+              "artists": [
+                {
+                  "id": "73600",
+                  "name": "DJ Voices"
+                },
+                {
+                  "id": "82763",
+                  "name": "MoMA Ready"
+                },
+                {
+                  "id": "39353",
+                  "name": "Sheepshead"
+                },
+                {
+                  "id": "102996",
+                  "name": "Sister Zo"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12472733",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2472733",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T19:00:00.000",
+              "endTime": "2026-07-30T02:00:00.000",
+              "title": "CLOCKWISE 1.11: EscaFlowne, Adder, datadata, lostverb",
+              "contentUrl": "/events/2472733",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "128789",
+                "name": "Jupiter Disco",
+                "contentUrl": "/clubs/128789"
+              },
+              "artists": [
+                {
+                  "id": "98969",
+                  "name": "EscaFlowne"
+                },
+                {
+                  "id": "135135",
+                  "name": "datadata"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12498561",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2498561",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T22:00:00.000",
+              "endTime": "2026-07-30T04:00:00.000",
+              "title": "DANCE DANCE DANCE",
+              "contentUrl": "/events/2498561",
+              "flyerFront": null,
+              "isTicketed": true,
+              "venue": {
+                "id": "36873",
+                "name": "Le Bain",
+                "contentUrl": "/clubs/36873"
+              },
+              "artists": [
+                {
+                  "id": "94203",
+                  "name": "DJ Moma"
+                },
+                {
+                  "id": "147762",
+                  "name": "DOUG"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12471576",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2471576",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T20:00:00.000",
+              "endTime": "2026-07-30T04:00:00.000",
+              "title": "Outer Heaven presents: RAAUL",
+              "contentUrl": "/events/2471576",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "209094",
+                "name": "Outer Heaven",
+                "contentUrl": "/clubs/209094"
+              },
+              "artists": [
+                {
+                  "id": "172567",
+                  "name": "RAAUL"
+                }
+              ]
+            }
+          },
+          {
+            "id": "12498234",
+            "listingDate": "2026-07-29T00:00:00.000",
+            "event": {
+              "id": "2498234",
+              "date": "2026-07-29T00:00:00.000",
+              "startTime": "2026-07-29T18:00:00.000",
+              "endTime": "2026-07-30T00:00:00.000",
+              "title": "RIVKA R3 NYC / Lee Walker",
+              "contentUrl": "/events/2498234",
+              "flyerFront": null,
+              "isTicketed": false,
+              "venue": {
+                "id": "279719",
+                "name": "MAD Radio NYC",
+                "contentUrl": "/clubs/279719"
+              },
+              "artists": [
+                {
+                  "id": "120503",
+                  "name": "RIVKA R3 NYC"
+                },
+                {
+                  "id": "27231",
+                  "name": "Lee Walker"
+                }
+              ]
+            }
+          }
+        ],
+        "totalResults": 642
+      },
+      "bumps": {
+        "bumpDecision": []
+      }
+    }
+  }
+}
