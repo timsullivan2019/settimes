@@ -76,6 +76,18 @@ hardcoded spike date — the adapter must compute the date at runtime).
 - Same for `pg_trgm`: `similarity()` goes through ``sql`` ``, never a Drizzle operator.
 - If Drizzle fights a query, drop to raw SQL rather than restructuring the schema.
 
+## Array parameters
+- Drizzle's `sql` template expands a JS array into N scalar placeholders, so
+  `${arr}::text[]` becomes `($1,$2,$3)::text[]` — a record cast, which Postgres
+  rejects (error 42846). For array-valued params, use the postgres.js client
+  directly, where an array binds as one parameter.
+- Relevant to `aliases`, `genres`, and any `text[]` column.
+
+## Testing
+- A test must exercise the same code path as the code it verifies. A rolled-back
+  transaction proves nothing if it uses a different client, binding, or input shape
+  than production does. State explicitly which path a test covers.
+
 ## Fetching
 - All outbound HTTP goes through `lib/fetcher.ts`. Nothing calls `fetch` or
   `undici` directly.
