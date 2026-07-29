@@ -375,3 +375,32 @@ null, because the radius filter fails silently.
 
 **Venue matching is not truly tested until Step 9,** when Dice names must resolve to
 venues RA already created. Seed `aliases` with real short forms.
+
+---
+
+## Addendum — Dice adapter, verified 2026-07-28
+
+**Two surfaces, different formats.** Browse SSR embeds local-offset ISO
+(`2026-08-02T14:00:00-04:00`); events-api returns UTC (`2026-07-29T03:00:00Z`).
+Both carry an explicit offset; a naive string is a format change and must fail loudly.
+
+**SSR pages are not sufficient** — they embed only ~25 events and ignore their own
+cursor. Coverage requires `events-api.dice.fm/v1/events`, the same request the site
+makes for any anonymous visitor. The API key is public (`window.EVENTS_API_KEY`,
+served to every logged-out visitor) and is scraped at runtime, never hardcoded, so
+it follows rotation. Still logged-out, no anti-bot circumvention. **If Dice ever
+gates or rotates this deliberately, fall back to SSR pages — do not work around it.**
+
+**Price:** tiers carry `total` (face_value + fees) in integer cents and a `sold_out`
+flag. `price_min_cents` = min total over tiers where `sold_out` is false. A fully
+sold-out event gets null, never a historical low tier.
+
+**`music:party` includes non-electronic events** (hip-hop, country). Kept
+deliberately — Step 14 classification sorts them. **Consequence: the §17.1 Gate must
+be computed AFTER genre classification, filtered to electronic genres.** Counting
+raw Dice events overstates the thesis.
+
+**Rooms vs venues.** `Elsewhere - Rooftop`, `Pianos: Showroom`, `Harriet's Lounge -
+1 Hotel` are rooms and stay as separate venue records. Multi-room modeling is
+backlog; separate records correctly prevent same-night different-room events from
+becoming dedupe candidates.
