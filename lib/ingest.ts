@@ -2,7 +2,7 @@ import { eq, sql } from "drizzle-orm";
 import { db as defaultDb, type Db } from "../db/client";
 import { events, eventSources, ingestRuns } from "../db/schema";
 import { computePartyNight } from "./time";
-import { eventSlug, shortHash } from "./slug";
+import { eventSlug, shortHash, slugify } from "./slug";
 import type { NormalEvent, Source } from "./types";
 
 // Step 5: naive ingest. No dedupe, no genre classification, no venue
@@ -23,14 +23,7 @@ export interface IngestResult {
 // this component is derived — existing slugs stay as minted (URLs are stable).
 function slugifyVenueName(name: string | null): string {
   if (name === null) return "unknown-venue";
-  const slug = name
-    .normalize("NFKD")
-    // strip combining diacritics left over from NFKD
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-  return slug || "unknown-venue";
+  return slugify(name) || "unknown-venue";
 }
 
 function eventFieldsFrom(e: NormalEvent, partyNight: string) {
