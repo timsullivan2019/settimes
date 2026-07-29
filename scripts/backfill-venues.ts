@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { client, db } from "../db/client";
-import { geocode, resolveVenue, type VenueMatch } from "../lib/venues";
+import { geocode, isAddressSecret, resolveVenue, type VenueMatch } from "../lib/venues";
 
 // Usage: npx tsx --env-file=.env.local scripts/backfill-venues.ts
 // Resolves venue_id for every event that lacks one, then prints the Step 8
@@ -44,6 +44,8 @@ async function main(): Promise<void> {
   console.log(`\nre-geocoding ${ungeocode.length} venues with null geog`);
   let regeocoded = 0;
   for (const v of ungeocode) {
+    // §9.1 rule 6: TBA/secret-location names must never be geocoded.
+    if (isAddressSecret(v.name as string)) continue;
     const geo = await geocode(v.name as string);
     if (geo === null) continue;
     await db.execute(sql`

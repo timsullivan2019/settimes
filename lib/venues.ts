@@ -17,6 +17,15 @@ const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
 // geog, logged) rather than getting a wrong point.
 const NYC_VIEWBOX = "-74.5,41.1,-73.4,40.2";
 
+// §9.1 rule 6: TBA/secret-location listings. These get address_secret=true
+// and must never be geocoded — display "Bushwick — address released day-of",
+// never a point.
+const ADDRESS_SECRET_RE = /\b(tba|tbd|secret|location (announced|released)|dm for)\b/i;
+
+export function isAddressSecret(venueNameRaw: string | null): boolean {
+  return venueNameRaw !== null && ADDRESS_SECRET_RE.test(venueNameRaw);
+}
+
 export type VenueMatch = "exact" | "alias" | "trigram" | "created";
 
 export interface ResolvedVenue {

@@ -4,6 +4,7 @@ import { events, eventSources, ingestRuns } from "../db/schema";
 import { computePartyNight } from "./time";
 import { eventSlug, shortHash, slugify } from "./slug";
 import type { NormalEvent, Source } from "./types";
+import { isAddressSecret } from "./venues";
 
 // Step 5: naive ingest. No dedupe, no genre classification, no venue
 // resolution — venue_name_raw only. Safe to run twice: the second run with
@@ -42,7 +43,9 @@ function eventFieldsFrom(e: NormalEvent, partyNight: string) {
     flyerUrl: e.flyerUrl,
     ticketUrl: e.ticketUrl,
     status: e.status,
-    addressSecret: e.addressSecret,
+    // §9.1 rule 6 detection ORs with the adapter's own signal — detection can
+    // add the flag, never clear an adapter-set one.
+    addressSecret: e.addressSecret || isAddressSecret(e.venueNameRaw),
   };
 }
 
