@@ -21,46 +21,61 @@ import {
 //      venue twice on one night means two real events, and RA's null
 //      ticket_url makes source_event_id the reliable form of §10's
 //      "different ticket URLs on the same platform".
-//   3. score (§10.3)      — 0.35 title + 0.40 lineup + 0.15 start + 0.10 price
-//   4. threshold          — ≥0.80 merge, below leave separate. No review queue:
-//      a visible duplicate is cosmetic, a hidden event is a product failure.
+//   3. score              — Step 11 calibrated weights (see below):
+//                           0.45 title + 0.25 lineup + 0.15 start + 0.15 price
+//   4. threshold          — ≥0.70 merge (≥0.80 when lineup is unknown), below
+//      leave separate. No review queue: a visible duplicate is cosmetic, a
+//      hidden event is a product failure.
 //
 // UNKNOWNS — missing data must never look like agreement. ~37% of RA events
 // have no lineup and RA supplies no price at all, so:
-//   - lineupJaccard is UNKNOWN when EITHER side has zero artists. Two empty
-//     lineups are neither a match (1.0) nor a clash (0.0) — the component is
-//     dropped and its 0.40 weight is redistributed proportionally across the
-//     components that do have data (score = Σw·s / Σw over known components).
+//   - the lineup component is UNKNOWN when EITHER side has zero artists. Two
+//     empty lineups are neither a match (1.0) nor a clash (0.0) — the
+//     component is dropped and its weight is redistributed proportionally
+//     across the components that do have data (score = Σw·s / Σw over known).
 //   - priceProximity is likewise UNKNOWN when either side has a null price.
 //   - title and start are always present, so a score always exists.
-//   - Losing the lineup removes the strongest signal, leaving mostly
-//     title + start — and two DIFFERENT parties at one venue often share a
-//     start time. The merge bar therefore rises to 0.90 when lineup is
-//     unknown: with price also unknown that requires title similarity ≥0.86
-//     even when the start times are identical.
+//   - An unknown lineup raises the bar to 0.80: with price also unknown that
+//     requires title similarity ≥0.73 even when the start times are identical.
 //
-// DEVIATION from §10.3, flagged: lineupJaccard runs over normalized artist
+// DEVIATION from §10.3, flagged: lineup similarity runs over normalized artist
 // NAMES extracted from event_sources.raw, not "resolved artist IDs" — the
 // artists / event_artists tables are empty because no build step has run
 // artist resolution yet. Names are stable across RA and Dice for the same
 // party; revisit when artist resolution lands.
 
-export const WEIGHTS = { title: 0.35, lineup: 0.4, start: 0.15, price: 0.1 } as const;
-export const MERGE_THRESHOLD = 0.8;
-export const MERGE_THRESHOLD_NO_LINEUP = 0.9;
+// Step 11 calibration (fixtures/dedupe-pairs.json — 60 hand-labelled pairs).
+// These values INVERT §10.3's stated assumption. The plan said lineup overlap
+// does the heavy lifting and titles are noisy; the labelled data shows the
+// reverse: cross-source listings of the same party agree on its NAME far more
+// reliably than on its bill, because sources list DISJOINT SLICES of the same
+// lineup (RA the undercard, Dice the headliner) far more often than they
+// disagree on what the party is called. Hence title-dominant weights, the
+// overlap coefficient instead of Jaccard (a union denominator reads a partial
+// listing as disagreement — the very thing §10.4 unions artists over on
+// merge), and lower bars. Labelled-set result: 0 false merges, 9 false splits
+// (previous config: 0/27). Guarded by dedupe-fixture.test.ts — rerun
+// scripts/tune-dedupe.ts before changing any of these numbers.
+export const WEIGHTS = { title: 0.45, lineup: 0.25, start: 0.15, price: 0.15 } as const;
+export const MERGE_THRESHOLD = 0.7;
+export const MERGE_THRESHOLD_NO_LINEUP = 0.8;
 
 // ---------------------------------------------------------------------------
 // Pure scoring pieces (unit-tested in dedupe.test.ts)
 // ---------------------------------------------------------------------------
 
-// §10.3: lowercase; strip presents/pres./w//feat./b2b/all night long/[nyc],
-// emoji, punctuation. Lineup overlap does the real work; titles are noisy.
+// §10.3 strip list plus the Step 11 additions: with/and/ft. are the
+// spelled-out twins of w/, &, and feat., and cross-source titles mix the
+// notations freely ("Open Decks with STEEN and…" vs "Open Decks w/ Steen &…").
 export function normalizeTitle(title: string): string {
   return title
     .toLowerCase()
     .replace(/\[nyc\]/g, " ")
     .replace(/\bpres(?:ents|\.)?(?=\s|$)/g, " ")
     .replace(/\bfeat(?:uring|\.)?(?=\s|$)/g, " ")
+    .replace(/\bft\.?(?=\s|$)/g, " ")
+    .replace(/\bwith\b/g, " ")
+    .replace(/\band\b/g, " ")
     .replace(/\bw\//g, " ")
     .replace(/\bb2b\b/g, " ")
     .replace(/\ball night long\b/g, " ")
@@ -70,11 +85,25 @@ export function normalizeTitle(title: string): string {
     .trim();
 }
 
+// Retained for scripts/tune-dedupe.ts comparisons; production scoring uses
+// overlapCoefficient (Step 11).
 export function jaccard(a: ReadonlySet<string>, b: ReadonlySet<string>): number {
   let intersection = 0;
   for (const x of a) if (b.has(x)) intersection++;
   const union = a.size + b.size - intersection;
   return union === 0 ? 0 : intersection / union;
+}
+
+// |∩| / min(|A|,|B|): a partial listing that is a SUBSET of the other side
+// scores 1.0 instead of being read as disagreement. The known risk — two
+// distinct parties sharing one opener also score 1.0 — is contained by the
+// title-dominant weights: title 0.30 + lineup 1.0 + start 1.0 still lands at
+// 0.63, under the 0.70 bar.
+export function overlapCoefficient(a: ReadonlySet<string>, b: ReadonlySet<string>): number {
+  let intersection = 0;
+  for (const x of a) if (b.has(x)) intersection++;
+  const min = Math.min(a.size, b.size);
+  return min === 0 ? 0 : intersection / min;
 }
 
 /** 1.0 within 60 minutes, linear down to 0 at 180 minutes (§10.3). */
@@ -106,6 +135,27 @@ export interface PairScore {
   score: number;
   threshold: number;
   components: PairComponents;
+}
+
+/** The scoring inputs one event contributes to a pair evaluation. */
+export interface ScoringView {
+  lineup: ReadonlySet<string>;
+  startsAtMs: number;
+  priceMinCents: number | null;
+}
+
+// Component assembly — the single path shared by the live dedupe loop and the
+// dedupe-fixture regression test, so the labelled ground truth exercises
+// exactly what production runs. Title similarity stays a parameter because it
+// comes from pg_trgm in SQL, never a JS clone.
+export function componentsFor(a: ScoringView, b: ScoringView, titleSimilarity: number): PairComponents {
+  return {
+    title: titleSimilarity,
+    lineup:
+      a.lineup.size === 0 || b.lineup.size === 0 ? null : overlapCoefficient(a.lineup, b.lineup),
+    start: startProximity(a.startsAtMs, b.startsAtMs),
+    price: priceProximity(a.priceMinCents, b.priceMinCents),
+  };
 }
 
 // Unknown components are excluded and their weight redistributed
@@ -468,13 +518,11 @@ export async function dedupe(db?: Db): Promise<DedupeReport> {
         const [simRow] = await db.execute(
           sql`select similarity(${a.normTitle}, ${b.normTitle})::float8 as s`,
         );
-        const components: PairComponents = {
-          title: Number(simRow.s),
-          lineup:
-            a.lineup.size === 0 || b.lineup.size === 0 ? null : jaccard(a.lineup, b.lineup),
-          start: startProximity(a.startsAt.toMillis(), b.startsAt.toMillis()),
-          price: priceProximity(a.priceMinCents, b.priceMinCents),
-        };
+        const components = componentsFor(
+          { lineup: a.lineup, startsAtMs: a.startsAt.toMillis(), priceMinCents: a.priceMinCents },
+          { lineup: b.lineup, startsAtMs: b.startsAt.toMillis(), priceMinCents: b.priceMinCents },
+          Number(simRow.s),
+        );
         const scored = combineScore(components);
         pair.score = scored.score;
         pair.threshold = scored.threshold;

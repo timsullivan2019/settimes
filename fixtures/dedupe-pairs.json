@@ -1567,8 +1567,8 @@
     },
     {
       "pairId": "469007",
-      "label": "SAME",
-      "uncertain": true,
+      "label": "RELATED",
+      "uncertain": false,
       "venue": "Knockdown Center",
       "partyNight": "2026-08-07",
       "a": {

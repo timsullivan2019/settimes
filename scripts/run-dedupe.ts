@@ -32,8 +32,8 @@ async function main(): Promise<void> {
   console.log(`left separate:         ${report.separate}`);
   console.log(`skipped (no venue_id): ${report.skippedNoVenue}`);
 
-  console.log("\n=== 2. sample merges (up to 10) ===");
-  for (const m of report.merges.slice(0, 10)) {
+  console.log(`\n=== 2. merges applied this run (${report.merges.length}) ===`);
+  for (const m of report.merges) {
     console.log(
       `  ${m.score === null ? "HARD " : m.score.toFixed(3)}  ${JSON.stringify(m.winnerTitle)}  ⇐  ${JSON.stringify(m.loserTitle)}`,
     );
