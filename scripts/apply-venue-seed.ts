@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
-import { sql } from "drizzle-orm";
-import { client, db } from "../db/client";
+import { client } from "../db/client";
+import { applySeedRow, type SeedPoint } from "../lib/venue-seed";
 
 // Usage: npx tsx --env-file=.env.local scripts/apply-venue-seed.ts
 //
@@ -8,6 +8,8 @@ import { client, db } from "../db/client";
 // rows: address, geog from lat/lng, aliases (pipe-separated, e.g.
 // "S.O.B.'s|Sounds of Brazil"). Safe to re-run as more rows get filled —
 // updates are idempotent and blank cells are skipped, never cleared.
+//
+// Runs on the postgres.js client (see lib/venue-seed.ts for why not drizzle).
 
 const CSV_PATH = "docs/venue-seed.csv";
 
@@ -72,9 +74,8 @@ async function main(): Promise<void> {
       continue;
     }
 
-    const venue = await db.execute(
-      sql`select id from venues where lower(name) = lower(${name}) limit 1`,
-    );
+    const venue = await client`
+      select id from venues where lower(name) = lower(${name}) limit 1`;
     if (venue.length === 0) {
       console.warn(`seed: no venue named ${JSON.stringify(name)} — skipped`);
       continue;
@@ -84,7 +85,7 @@ async function main(): Promise<void> {
     if ((latRaw === "") !== (lngRaw === "")) {
       console.warn(`seed: ${JSON.stringify(name)} has only one of lat/lng — point skipped`);
     }
-    let point: { lat: number; lng: number } | null = null;
+    let point: SeedPoint | null = null;
     if (latRaw !== "" && lngRaw !== "") {
       const lat = Number(latRaw);
       const lng = Number(lngRaw);
@@ -99,17 +100,7 @@ async function main(): Promise<void> {
       }
     }
 
-    await db.execute(sql`
-      update venues set
-        address = coalesce(nullif(${address}, ''), address),
-        geog = coalesce(
-          ${point === null ? sql`null` : sql`ST_SetSRID(ST_MakePoint(${point.lng}, ${point.lat}), 4326)::geography`},
-          geog),
-        aliases = (
-          select coalesce(array_agg(distinct a), '{}')
-          from unnest(aliases || ${aliases}::text[]) a
-        )
-      where id = ${venueId}`);
+    await applySeedRow(client, venueId, { aliases, address: address || null, point });
     applied++;
     console.log(
       `seed: applied ${JSON.stringify(name)}` +
@@ -121,13 +112,13 @@ async function main(): Promise<void> {
 
   console.log(`\napplied: ${applied} · untouched blank rows: ${skippedBlank}`);
 
-  const [m] = await db.execute(sql`
+  const [m] = await client`
     select
       count(*) filter (where not address_secret)::int as eligible,
       count(*) filter (where not address_secret
         and exists (select 1 from venues v where v.id = events.venue_id and v.geog is not null)
       )::int as with_point
-    from events`);
+    from events`;
   const eligible = m.eligible as number;
   const withPoint = m.with_point as number;
   console.log(
