@@ -28,7 +28,7 @@ function EventRow({ event }: { event: UpcomingEvent }) {
 }
 
 export default async function Home() {
-  const events = await getUpcomingEvents();
+  const { events } = await getUpcomingEvents();
   return (
     <main>
       <h1>settimes.nyc</h1>

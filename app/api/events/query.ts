@@ -27,7 +27,19 @@ export interface UpcomingEvent {
   status: string;
 }
 
+// Display ceiling ONLY. The response always carries `total` (the unlimited
+// count) so a truncated result is visible in the payload. Counting and
+// analytics queries must never route through this function — §17.1's Week One
+// Gate counts events directly in SQL.
 const DEFAULT_LIMIT = 200;
+export const MAX_LIMIT = 1000;
+
+export interface UpcomingEventsResult {
+  events: UpcomingEvent[];
+  /** Unlimited count matching the same filters. */
+  total: number;
+  limit: number;
+}
 
 // Raw db.execute rows come back from the drizzle/postgres-js driver with
 // timestamptz as a string like "2026-07-28 23:00:00+00" (drizzle disables the
@@ -45,7 +57,10 @@ function isoInstant(value: unknown): string {
   throw new Error(`isoInstant: unparseable timestamptz ${JSON.stringify(value)}`);
 }
 
-export async function getUpcomingEvents(limit: number = DEFAULT_LIMIT): Promise<UpcomingEvent[]> {
+export async function getUpcomingEvents(
+  limit: number = DEFAULT_LIMIT,
+): Promise<UpcomingEventsResult> {
+  const cappedLimit = Math.min(Math.max(Math.trunc(limit), 1), MAX_LIMIT);
   // "Upcoming" keys on party_night, not the calendar date: at 1am Sunday the
   // current party night is still Saturday's, so in-progress parties stay listed.
   const tonight = computePartyNight(DateTime.now());
@@ -62,6 +77,7 @@ export async function getUpcomingEvents(limit: number = DEFAULT_LIMIT): Promise<
       e.ends_at,
       e.party_night::text as party_night,
       e.venue_name_raw,
+      count(*) over () as total,
       coalesce(lineup.names, '{}') as artist_names,
       e.price_min_cents,
       e.is_free,
@@ -81,10 +97,10 @@ export async function getUpcomingEvents(limit: number = DEFAULT_LIMIT): Promise<
       and not e.suppressed
       and e.party_night >= ${tonight}::date
     order by e.starts_at asc
-    limit ${limit}
+    limit ${cappedLimit}
   `);
 
-  return rows.map((r) => ({
+  const events = rows.map((r) => ({
     id: r.id as string,
     slug: r.slug as string,
     title: r.title as string,
@@ -100,4 +116,10 @@ export async function getUpcomingEvents(limit: number = DEFAULT_LIMIT): Promise<
     flyer_url: r.flyer_url as string | null,
     status: r.status as string,
   }));
+
+  // count(*) over () runs on the filtered set before LIMIT applies; bigint
+  // arrives as a string from the raw driver. Zero rows → zero total.
+  const total = rows.length > 0 ? Number(rows[0].total) : 0;
+
+  return { events, total, limit: cappedLimit };
 }
