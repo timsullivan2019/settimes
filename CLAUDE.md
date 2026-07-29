@@ -49,6 +49,12 @@ hardcoded spike date — the adapter must compute the date at runtime).
   and a Sunday 00:30 party are the same night. Every filter and dedupe
   candidate keys on `party_night`, never the calendar date.
 
+## Reading dates back out of Postgres
+- `party_night` is a DATE column. postgres.js hydrates it into a JS `Date` at UTC
+  midnight, which renders as the PREVIOUS evening in America/New_York.
+- Always select it as `party_night::text` and treat it as a string. Never let a
+  `Date` object represent a party night anywhere in the app.
+
 ## Data integrity
 - Every adapter validates its output with Zod. Parse failure throws with the
   diff. Never coerce, never fill defaults.
