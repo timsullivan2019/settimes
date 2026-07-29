@@ -404,3 +404,28 @@ raw Dice events overstates the thesis.
 1 Hotel` are rooms and stay as separate venue records. Multi-room modeling is
 backlog; separate records correctly prevent same-night different-room events from
 becoming dedupe candidates.
+
+---
+
+## Addendum — schema drift from §7 (2026-07-28)
+
+The live schema now differs from §7 of the plan. Migrations are authoritative:
+
+- `venues.geocode_blocked boolean not null default false` (0001) — backfill skips
+  these permanently. Nulling a bad geocode alone is not enough: backfill retries
+  every null-geog venue and Nominatim returns the same wrong POI.
+- `venues.notes text` (0001) — records why a venue is blocked or hand-seeded.
+  §7 gives `notes` only to promoters.
+
+**Rooms vs venues — refined.** Separate venue records only where a venue programs
+multiple rooms SIMULTANEOUSLY (Elsewhere, Pianos, 1 Hotel). A bar with a rooftop
+does not, so those merge. Test: can two different events run at the same time under
+one roof? Yes → separate records. No → alias.
+
+**Venue state after Step 9:** 100% of events venue-linked, 88.9% (927/1043) with a
+usable point. The denominator grew with Dice's venues; the seed file remains the
+long-tail mechanism.
+
+**Overlap tracking:** RA↔Dice events sharing (party_night, venue_id): 124 → 132 →
+133 across the venue merges. ~32% of 414 Dice events. Pre-dedupe estimate only —
+includes both true duplicates and RELATED same-venue-same-night distinct events.
