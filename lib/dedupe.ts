@@ -2,8 +2,12 @@ import { sql } from "drizzle-orm";
 import { DateTime } from "luxon";
 import type { Db } from "../db/client";
 import { parseLineup } from "./artists";
-import { parseLocal } from "./time";
-import type { Source } from "./types";
+import {
+  resolveCanonical,
+  toDateTime,
+  trustRankOf,
+  type CanonicalMember,
+} from "./canonical";
 
 // Step 10: deduplication, §10 exactly.
 //
@@ -44,9 +48,6 @@ import type { Source } from "./types";
 export const WEIGHTS = { title: 0.35, lineup: 0.4, start: 0.15, price: 0.1 } as const;
 export const MERGE_THRESHOLD = 0.8;
 export const MERGE_THRESHOLD_NO_LINEUP = 0.9;
-
-// §10.4 trust order for canonical field resolution (crawl = jsonld adapter).
-const TRUST: Source[] = ["ra", "dice", "posh", "jsonld", "submission"];
 
 // ---------------------------------------------------------------------------
 // Pure scoring pieces (unit-tested in dedupe.test.ts)
@@ -239,116 +240,56 @@ export interface DedupeReport {
   merges: MergeRecord[];
 }
 
-function toDateTime(v: unknown): DateTime {
-  // Raw db.execute returns timestamptz as a string ("2026-07-28 23:00:00+00");
-  // never assume the driver's return type.
-  if (v instanceof Date) return DateTime.fromJSDate(v);
-  if (typeof v === "string") return parseLocal(v);
-  throw new Error(`expected timestamp, got ${typeof v}`);
-}
-
 function trustRank(ev: Ev): number {
-  let best = TRUST.length;
-  for (const s of ev.sources) {
-    const rank = TRUST.indexOf(s.source as Source);
-    if (rank !== -1 && rank < best) best = rank;
-  }
-  return best;
+  return trustRankOf(ev.sources.map((s) => s.source));
 }
 
-function bestSourceName(ev: Ev): string {
-  const rank = trustRank(ev);
-  return TRUST[rank] ?? "unknown";
-}
-
-/** Numeric restrictiveness of an age string; higher = more restrictive. */
-function ageRank(s: string | null): number | null {
-  if (s === null) return null;
-  if (/all ages/i.test(s)) return 0;
-  const m = /(\d{1,2})\s*\+/.exec(s);
-  return m ? Number(m[1]) : null;
-}
-
-// §10.4 canonical field resolution: best value per field, not one winning row.
-// Mutates `w` in memory (so later merges into the same canonical row resolve
-// against accumulated state) and returns the per-field provenance.
-function resolveFields(w: Ev, l: Ev): FieldResolution[] {
-  const res: FieldResolution[] = [];
-  const note = (field: string, value: unknown, from: Ev) => {
-    res.push({ field, value, fromSource: bestSourceName(from), fromTitle: from.title });
+function asMember(ev: Ev): CanonicalMember {
+  return {
+    id: ev.id,
+    sources: ev.sources.map((s) => s.source),
+    title: ev.title,
+    startsAt: ev.startsAt,
+    endsAt: ev.endsAt,
+    priceMinCents: ev.priceMinCents,
+    priceMaxCents: ev.priceMaxCents,
+    isFree: ev.isFree,
+    ageRestriction: ev.ageRestriction,
+    ticketUrl: ev.ticketUrl,
+    flyerUrl: ev.flyerUrl,
   };
+}
 
-  // title: from the highest-trust source; longer wins a trust tie.
-  const titleFrom =
-    trustRank(l) < trustRank(w) || (trustRank(l) === trustRank(w) && l.title.length > w.title.length)
-      ? l
-      : w;
-  note("title", titleFrom.title, titleFrom);
+// §10.4 canonical field resolution — delegated to the shared n-way resolver
+// in lib/canonical.ts (the same one ingest uses to recompute merge groups).
+// Mutates `w` in memory so later merges into the same canonical row resolve
+// against accumulated state, and returns the per-field provenance.
+function resolveFields(w: Ev, l: Ev): FieldResolution[] {
+  // Winner first: full ties keep the winner's value.
+  const { fields, provenance } = resolveCanonical([asMember(w), asMember(l)]);
+  const titles = new Map([
+    [w.id, w.title],
+    [l.id, l.title],
+  ]);
+  const res: FieldResolution[] = provenance.map((p) => ({
+    field: p.field,
+    value: p.value,
+    fromSource: p.source,
+    fromTitle: titles.get(p.memberId) ?? "?",
+  }));
 
-  // starts_at: earliest reported. Candidates share party_night by
-  // construction, so the earlier instant never moves the night.
-  const startFrom = l.startsAt.toMillis() < w.startsAt.toMillis() ? l : w;
-  note("starts_at", startFrom.startsAt.toISO(), startFrom);
-
-  // ends_at: §10.4 has no rule — prefer a known end over null, keep winner's
-  // when both are known.
-  const endFrom = w.endsAt !== null ? w : l;
-  note("ends_at", endFrom.endsAt?.toISO() ?? null, endFrom);
-
-  // price: lowest AVAILABLE price (§9.1 rule 4 already made price_min_cents
-  // "currently available" per source). Two nulls stay null — not agreement.
-  let priceFrom: Ev | null = null;
-  if (w.priceMinCents !== null || l.priceMinCents !== null) {
-    priceFrom =
-      l.priceMinCents !== null && (w.priceMinCents === null || l.priceMinCents < w.priceMinCents)
-        ? l
-        : w;
-    note("price_min_cents", priceFrom.priceMinCents, priceFrom);
-    note("price_max_cents", priceFrom.priceMaxCents, priceFrom);
-  }
-
-  // ticket_url: from the lowest-price source; without any price, the
-  // highest-trust non-null URL.
-  let ticketFrom: Ev | null = null;
-  if (priceFrom !== null && priceFrom.ticketUrl !== null) {
-    ticketFrom = priceFrom;
-  } else if (w.ticketUrl !== null || l.ticketUrl !== null) {
-    const withUrl = [w, l].filter((e) => e.ticketUrl !== null);
-    withUrl.sort((a, b) => trustRank(a) - trustRank(b));
-    ticketFrom = withUrl[0];
-  }
-  if (ticketFrom !== null) note("ticket_url", ticketFrom.ticketUrl, ticketFrom);
-
-  // age: most restrictive; unparseable strings lose to parseable ones.
-  let ageFrom: Ev | null = null;
-  const wAge = ageRank(w.ageRestriction);
-  const lAge = ageRank(l.ageRestriction);
-  if (w.ageRestriction !== null || l.ageRestriction !== null) {
-    if (wAge !== null && lAge !== null) ageFrom = lAge > wAge ? l : w;
-    else if (lAge !== null) ageFrom = l;
-    else if (wAge !== null) ageFrom = w;
-    else ageFrom = w.ageRestriction !== null ? w : l;
-    note("age_restriction", ageFrom.ageRestriction, ageFrom);
-  }
-
-  // flyer: "highest resolution" needs fetching both images — not done. Keep
-  // the winner's unless it has none.
-  const flyerFrom = w.flyerUrl !== null ? w : l;
-  if (flyerFrom.flyerUrl !== null) note("flyer_url", flyerFrom.flyerUrl, flyerFrom);
-
-  // Apply to the in-memory winner.
-  w.title = titleFrom.title;
-  w.normTitle = titleFrom.normTitle;
-  w.startsAt = startFrom.startsAt;
-  w.endsAt = endFrom.endsAt;
-  if (priceFrom !== null) {
-    w.priceMinCents = priceFrom.priceMinCents;
-    w.priceMaxCents = priceFrom.priceMaxCents;
-  }
-  w.isFree = w.priceMinCents !== null ? w.priceMinCents === 0 : w.isFree || l.isFree;
-  if (ticketFrom !== null) w.ticketUrl = ticketFrom.ticketUrl;
-  if (ageFrom !== null) w.ageRestriction = ageFrom.ageRestriction;
-  w.flyerUrl = flyerFrom.flyerUrl;
+  w.title = fields.title;
+  w.normTitle = normalizeTitle(fields.title);
+  // Candidates share party_night by construction, so the earliest instant
+  // never moves the night.
+  w.startsAt = fields.startsAt;
+  w.endsAt = fields.endsAt;
+  w.priceMinCents = fields.priceMinCents;
+  w.priceMaxCents = fields.priceMaxCents;
+  w.isFree = fields.isFree;
+  w.ticketUrl = fields.ticketUrl;
+  w.ageRestriction = fields.ageRestriction;
+  w.flyerUrl = fields.flyerUrl;
   // union of artists (§10.4) — persists only in memory for later scoring;
   // there is no event_artists data to write until artist resolution exists.
   for (const a of l.lineup) w.lineup.add(a);
