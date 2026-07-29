@@ -163,9 +163,11 @@ function normalize(listing: RaListing): NormalEvent {
     doorOnly: false,
     ageRestriction: null,
     flyerUrl: absolutize(e.flyerFront),
-    // RA sells on the event page itself; only claim it as a ticket link when
-    // the event is actually ticketed there.
-    ticketUrl: e.isTicketed ? sourceUrl : null,
+    // Always null from RA: ra.co/events/<id> is a listing page, not a
+    // checkout link, and RA returns no price — so it can't satisfy §10.4's
+    // "lowest available price → that source's ticket link". The page itself
+    // lives on in event_sources.source_url ("View on RA").
+    ticketUrl: null,
     status: "confirmed" as const,
     addressSecret: false,
     raw: listing,
