@@ -318,3 +318,36 @@ where party_night
 
 Must return 0. Non-zero means `lib/time.ts` and the SQL definition have
 drifted — fix before proceeding, since every dedupe candidate set depends on it.
+
+---
+
+## Addendum — RA adapter, verified 2026-07-28
+
+**`bumps` cannot be removed.** Deleting the selection makes RA's resolver return
+`{"errors":[{"message":"Error fetching event listings & bumps"}]}`. Keep a minimal
+`bumps { bumpDecision { id } }`. Never request `clickUrl`/`impressionUrl`, never
+parse bump payloads. Only `eventListings.data` is ingested.
+
+**No date/startTime join is needed.** RA returns `date`, `startTime`, `endTime` as
+full naive ISO datetimes — `startTime` already carries its own date. Do NOT graft
+`date`'s date-part onto `startTime`: an event listed under Saturday with doors at
+Sunday 01:00 has `date`=Sat and `startTime`=Sun 01:00, and re-joining shifts it a
+full day. A strict Zod regex enforces full-datetime shape on all three fields.
+
+**`ticket_url` is unconditionally null from RA.** RA returns no price, and
+`/events/{id}` is a listing page, not checkout. The URL lives in
+`event_sources.source_url` for a "View on RA" link. Consequence for §10.4: RA rows
+never auto-merge via the identical-ticket_url rule.
+
+**~37% of RA events have zero artists** (231 of 629 in a 30-day window). Empty
+lineups are normal — open decks, TBA, promoters who typed names into prose. Venue
+and start time were present on 100%.
+
+Consequence for §10.3: lineup Jaccard carries the heaviest weight (0.40) and is
+unavailable for roughly a third of RA events. **The Step 11 labelling set must
+include no-lineup pairs**, or the weights get tuned only against easy cases.
+
+**Artist names carry RA disambiguators.** e.g. `Djgothqueen (3)` — the suffix marks
+a distinct artist sharing a name, NOT a performance note. Step 8 artist resolution
+must key on RA's structured artist `id` first, falling back to name only when no id
+exists. Stripping the suffix and matching on name alone merges different people.
