@@ -38,8 +38,10 @@ async function main(): Promise<void> {
 
   // Second pass: venues that exist but never geocoded. Retries are cheap and
   // the geocoder improves over time; only null-geog venues are touched.
+  // geocode_blocked marks names Nominatim resolves to a wrong-but-plausible
+  // POI (reason in venues.notes) — retrying would re-apply the wrong point.
   const ungeocode = await db.execute(
-    sql`select id, name from venues where geog is null order by name`,
+    sql`select id, name from venues where geog is null and not geocode_blocked order by name`,
   );
   console.log(`\nre-geocoding ${ungeocode.length} venues with null geog`);
   let regeocoded = 0;

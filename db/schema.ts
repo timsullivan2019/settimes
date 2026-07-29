@@ -39,6 +39,9 @@ export const venues = pgTable(
     website: text("website"),
     instagram: text("instagram"),
     isDark: boolean("is_dark").default(false),
+    // Nominatim returns a wrong-but-plausible POI for this name; never retry.
+    geocodeBlocked: boolean("geocode_blocked").notNull().default(false),
+    notes: text("notes"),
     createdAt: timestamp("created_at", { withTimezone: true }).default(sql`now()`),
   },
   (t) => [

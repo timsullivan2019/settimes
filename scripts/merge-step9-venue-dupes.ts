@@ -17,19 +17,42 @@ import { client, db } from "../db/client";
 // dedupe hard rules must keep as separate events (Elsewhere's Hall vs Zone
 // One). Multi-room modeling is backlog (§5.3); until then, distinct rows are
 // the representation that keeps dedupe honest.
+//
+// Refinement: that rule applies only where a venue programs multiple rooms
+// SIMULTANEOUSLY (Elsewhere, Pianos). A bar with a rooftop runs one party at
+// a time, so merging costs nothing and prevents missed dedupes — which is why
+// "LoHi Rooftop Bar" merges into LoHi below while the names above stay.
 
 const MERGES: Array<{ dupe: string; target: string }> = [
   { dupe: "Elsewhere, Brooklyn", target: "Elsewhere" },
   { dupe: "314 Scholes St, Brooklyn, NY 11206, USA", target: "LoHi" },
   { dupe: "Marquee Skydeck at Edge Hudson Yards", target: "Marquee Skydeck Edge" },
   { dupe: "Circle Line Boat", target: "Circle Line Cruises" },
+  // Second pass: both are LoHi (314 Scholes St) — an RA address-as-name row
+  // and Dice's name for the rooftop of a single-room bar (see above).
+  { dupe: "314 Scholes", target: "LoHi" },
+  { dupe: "LoHi Rooftop Bar", target: "LoHi" },
 ];
 
-// Geocodes that landed on unrelated POIs inside the bounding box ("Paradise
-// Coney Island" → a flower shop, "Brooklyn Backyard" → a garden). A wrong
+// Geocodes that landed on unrelated POIs inside the bounding box. A wrong
 // point silently corrupts the radius filter; null does not. The address
-// column on these rows came from the same wrong geocode, so it is nulled too.
-const WRONG_GEOCODES = ["Paradise Coney Island", "Brooklyn Backyard"];
+// column on these rows came from the same wrong geocode, so it is nulled too
+// — and geocode_blocked is set so backfill-venues.ts never re-applies the
+// same wrong Nominatim hit. The reason lands in venues.notes.
+const WRONG_GEOCODES: Array<{ name: string; reason: string }> = [
+  {
+    name: "Paradise Coney Island",
+    reason:
+      "geocode_blocked 2026-07-29: Nominatim resolves this name to Paradise Flowers " +
+      "(a flower shop on Coney Island Ave) — wrong POI; needs hand-set coordinates",
+  },
+  {
+    name: "Brooklyn Backyard",
+    reason:
+      "geocode_blocked 2026-07-29: Nominatim resolves this name to Backyard Garden " +
+      "(Carroll Gardens) — wrong POI; needs hand-set coordinates",
+  },
+];
 
 async function overlapCount(): Promise<number> {
   const [row] = await db.execute(sql`
@@ -79,15 +102,16 @@ async function main(): Promise<void> {
     );
   }
 
-  for (const name of WRONG_GEOCODES) {
+  for (const { name, reason } of WRONG_GEOCODES) {
     const rows = await db.execute(sql`
-      update venues set geog = null, address = null
-      where name = ${name} and geog is not null
+      update venues
+      set geog = null, address = null, geocode_blocked = true, notes = ${reason}
+      where name = ${name} and (geog is not null or not geocode_blocked)
       returning name`);
     console.log(
       rows.length > 0
-        ? `nulled wrong geocode on ${JSON.stringify(name)}`
-        : `skip (no point set): ${JSON.stringify(name)}`,
+        ? `geocode-blocked ${JSON.stringify(name)}`
+        : `skip (already blocked): ${JSON.stringify(name)}`,
     );
   }
 
