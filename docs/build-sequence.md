@@ -429,3 +429,17 @@ long-tail mechanism.
 **Overlap tracking:** RA↔Dice events sharing (party_night, venue_id): 124 → 132 →
 133 across the venue merges. ~32% of 414 Dice events. Pre-dedupe estimate only —
 includes both true duplicates and RELATED same-venue-same-night distinct events.
+
+**Canonical resolution lives in lib/canonical.ts** — one n-way §10.4 resolver, used
+by both dedupe (on merge) and ingest (on recompute). Never duplicate this logic.
+After any source refreshes the row it owns, ingest walks to the canonical root and
+re-resolves from every member of the merge group.
+
+**Known bounded staleness:** if a source RETRACTS a value (deletes a price rather
+than changing it), the canonical can hold the old value until the root's own source
+next ingests — at most one 6h cycle. Recoverable-stale per §9.1 rule 2, not
+corruption. Full fix would re-normalize every member from event_sources.raw at
+recompute time; judged out of proportion. Revisit if Step 11 surfaces a stale pair.
+
+**Invariant to check after any ingest/dedupe change:** canonical = total − merged.
+Raw is_canonical counts drift legitimately as the rolling window moves.
