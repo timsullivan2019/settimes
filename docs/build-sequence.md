@@ -479,3 +479,39 @@ guaranteed to hold for three.
 30-day window (~75/week vs a 30 threshold). Two caveats before this counts: it
 includes non-electronic events riding in on Dice's `music:party` tag, so the Gate
 must be computed AFTER genre classification; and Posh is not yet in.
+
+---
+
+## Addendum — Step 11 calibration (2026-07-28)
+
+**§10.3's stated assumption was wrong.** The plan said lineup does the heavy lifting
+and titles are noisy. The labelled data shows the reverse: title 0.45, lineup 0.25.
+Sources list disjoint slices of the same bill far more often than they disagree on
+what the party is called.
+
+**Applied config:** overlap coefficient (|∩|/min) not Jaccard · weights
+0.45/0.25/0.15/0.15 · bars 0.70 base, 0.80 no-lineup · strip list extended with
+`with`, `and`, `ft.`. Result on the labelled set: 0 false merges, 8 false splits,
+down from 0/27.
+
+**Why not the grid argmax:** it lived at a corner where a lineup-less pair
+renormalized to 0.556 weight on start proximity — two different parties both opening
+at 10pm would merge on title similarity as low as 0.38, and a shared-opener DISTINCT
+pair scored 0.844. Overfitting to 60 pairs in the direction the mission can't absorb.
+Unit test pins the shared-opener arithmetic at 0.63 < 0.70.
+
+**Three merges clear the bar by 0.006** (identical title, disjoint lineup). First to
+unmerge if title weighting ever softens. The fixture catches it.
+
+**RELATED is protected by the hard block rule, not the threshold.** Same-platform
+multi-room pairs never reach scoring. Cross-platform RELATED (RA lists one Skyport
+sailing, Dice another) does get scored — those appear in the labelled set, mostly
+labelled DISTINCT, with a 0.266 margin below the bar.
+
+**RE-RUN THE FIXTURE AFTER POSH LANDS.** A config tuned on two sources is not
+guaranteed to hold for three.
+
+**Gate tracking:** 93 of 414 Dice events merge into RA → 321 Dice-only events in a
+30-day window (~75/week vs a 30 threshold). Two caveats before this counts: it
+includes non-electronic events riding in on Dice's `music:party` tag, so the Gate
+must be computed AFTER genre classification; and Posh is not yet in.
