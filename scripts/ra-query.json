@@ -1,0 +1,22 @@
+{
+  "operationName": "GET_EVENT_LISTINGS_WITH_BUMPS",
+  "variables": {
+    "filters": {
+      "areas": { "eq": 8 },
+      "listingDate": { "gte": "2026-07-28" }
+    },
+    "filterOptions": {
+      "genre": true,
+      "eventType": true
+    },
+    "pageSize": 20,
+    "page": 1,
+    "sort": {
+      "listingDate": { "order": "ASCENDING" },
+      "score": { "order": "DESCENDING" },
+      "titleKeyword": { "order": "ASCENDING" }
+    },
+    "areaId": 8
+  },
+  "query": "query GET_EVENT_LISTINGS_WITH_BUMPS($filters: FilterInputDtoInput, $filterOptions: FilterOptionsInputDtoInput, $page: Int, $pageSize: Int, $sort: SortInputDtoInput, $areaId: ID) {\n  eventListingsWithBumps(\n    filters: $filters\n    filterOptions: $filterOptions\n    pageSize: $pageSize\n    page: $page\n    sort: $sort\n    areaId: $areaId\n  ) {\n    eventListings {\n      data {\n        id\n        listingDate\n        event {\n          ...eventListingsFields\n          __typename\n        }\n        __typename\n      }\n      filterOptions {\n        genre {\n          label\n          value\n          count\n          __typename\n        }\n        eventType {\n          value\n          count\n          __typename\n        }\n        location {\n          value {\n            from\n            to\n            __typename\n          }\n          count\n          __typename\n        }\n        __typename\n      }\n      totalResults\n      __typename\n    }\n    bumps {\n      bumpDecision {\n        id\n        date\n        eventId\n        clickUrl\n        impressionUrl\n        event {\n          ...eventListingsFields\n          artists {\n            id\n            name\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment eventListingsFields on Event {\n  id\n  date\n  startTime\n  endTime\n  title\n  contentUrl\n  flyerFront\n  isTicketed\n  interestedCount\n  isSaved\n  isInterested\n  queueItEnabled\n  newEventForm\n  images {\n    id\n    filename\n    alt\n    type\n    crop\n    __typename\n  }\n  pick {\n    id\n    blurb\n    __typename\n  }\n  venue {\n    id\n    name\n    contentUrl\n    live\n    __typename\n  }\n  promoters {\n    id\n    __typename\n  }\n  artists {\n    id\n    name\n    __typename\n  }\n  tickets(queryType: AVAILABLE) {\n    validType\n    onSaleFrom\n    onSaleUntil\n    __typename\n  }\n  ticketing {\n    tags {\n      defaultTitle\n      type\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n"
+}
