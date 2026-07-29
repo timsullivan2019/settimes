@@ -1,0 +1,2176 @@
+{
+  "generatedAt": "2026-07-29",
+  "source": "docs/dedupe-pairs-manually-categorized.csv",
+  "note": "Human-labelled dedupe calibration set (Step 11). Labels: SAME (one party, multiple listings), DISTINCT (different parties), RELATED (same venue/night, different room/session — must never merge). uncertain=true means the label ended in '?' and weighs 0.5 in tuning. `shipped` holds the score the pre-tuning config (0.35/0.40/0.15/0.10, bars 0.80/0.90, jaccard, base normalization) produced from each event's own-source view. Raw inputs are included so any future scorer can be re-evaluated against these labels.",
+  "pairs": [
+    {
+      "pairId": "0bbc69",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-22",
+      "a": {
+        "title": "EDMBoat.com - #1 EDM HOUSE SUNSET BOAT 2026",
+        "startMs": 1787436000000,
+        "startNY": "2026-08-22 18:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "HAUS ON HUDSON: SUNSET YACHT PARTY",
+        "startMs": 1787434200000,
+        "startNY": "2026-08-22 17:30",
+        "lineup": [],
+        "priceMinCents": 3477,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.3949,
+        "threshold": 0.9,
+        "titleSimilarity": 0.1356,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "e8d5ce",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Elsewhere",
+      "partyNight": "2026-08-08",
+      "a": {
+        "title": "Jawani 4eva: Aku, Arjxn, Eshie, jakari wing, Rajuju",
+        "startMs": 1786219200000,
+        "startNY": "2026-08-08 16:00",
+        "lineup": [
+          "Aku",
+          "Arjxn",
+          "Eshie",
+          "jakari wing",
+          "Rajuju"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Cuffing Season: OLEA, Esentrik, Arthur Tan, Okay Ivy, SINZ, Blesst + Goldie Harris & Friends",
+        "startMs": 1786242600000,
+        "startNY": "2026-08-08 22:30",
+        "lineup": [
+          "olea",
+          "eSenTRIK",
+          "Arthur Tan",
+          "Sinz",
+          "Goldie Harris",
+          "cuffing season"
+        ],
+        "priceMinCents": 4666,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.0231,
+        "threshold": 0.8,
+        "titleSimilarity": 0.0593,
+        "lineupJaccard": 0,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "20834d",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Park Slope Warehouse",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "The Ornate Project: Infected Mushroom (Live Band + DJ Set) + Blastoyz",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [
+          "Infected Mushroom",
+          "Bruce Wayne (US)"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Infected Mushroom [Live] / Blastoyz",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [
+          "Infected Mushroom",
+          "Blastoyz",
+          "Bruce Wayne (US)"
+        ],
+        "priceMinCents": 4532,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.667,
+        "threshold": 0.8,
+        "titleSimilarity": 0.5246,
+        "lineupJaccard": 0.6667,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "f1da12",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Jupiter Disco",
+      "partyNight": "2026-07-30",
+      "a": {
+        "title": "Space Bunz, Pook, 5LAPHOUSE",
+        "startMs": 1785452400000,
+        "startNY": "2026-07-30 19:00",
+        "lineup": [
+          "5LAPHOUSE"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Tromac, JaySwann, dj until",
+        "startMs": 1785463200000,
+        "startNY": "2026-07-30 22:00",
+        "lineup": [
+          "Tromac",
+          "DJ Unt.il"
+        ],
+        "priceMinCents": 0,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0,
+        "threshold": 0.8,
+        "titleSimilarity": 0,
+        "lineupJaccard": 0,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "2f5240",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-15",
+      "a": {
+        "title": "EDMBoat.com - #1 EDM HOUSE SUNSET BOAT 2026",
+        "startMs": 1786831200000,
+        "startNY": "2026-08-15 18:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "HAUS ON HUDSON: SUNSET YACHT PARTY",
+        "startMs": 1786829400000,
+        "startNY": "2026-08-15 17:30",
+        "lineup": [],
+        "priceMinCents": 3477,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.3949,
+        "threshold": 0.9,
+        "titleSimilarity": 0.1356,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "bf5315",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Jupiter Disco",
+      "partyNight": "2026-08-07",
+      "a": {
+        "title": "Top Secret Grand Prix Record Release Party: Spiñorita, DJ Shannon, Cosmo",
+        "startMs": 1786154400000,
+        "startNY": "2026-08-07 22:00",
+        "lineup": [
+          "Spiñorita",
+          "DJ Shannon",
+          "Cosmo (NY)"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Spiñorita, DJ Shannon, Cosmo",
+        "startMs": 1786154400000,
+        "startNY": "2026-08-07 22:00",
+        "lineup": [
+          "Spiñorita",
+          "DJ Shannon",
+          "Cosmo"
+        ],
+        "priceMinCents": 1133,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5444,
+        "threshold": 0.8,
+        "titleSimilarity": 0.4,
+        "lineupJaccard": 0.5,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "70e712",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "SILO",
+      "partyNight": "2026-07-30",
+      "a": {
+        "title": "Continuum (Main Room Event, Free with RSVP)",
+        "startMs": 1785459600000,
+        "startNY": "2026-07-30 21:00",
+        "lineup": [
+          "nextdimensional",
+          "Touch Base",
+          "Choo Choo",
+          "R-DNA",
+          "Alex Hell-n"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Continuum (Main Room Event, Free w/ RSVP)",
+        "startMs": 1785459600000,
+        "startNY": "2026-07-30 21:00",
+        "lineup": [
+          "nextdimensional",
+          "Touch Base"
+        ],
+        "priceMinCents": 0,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6847,
+        "threshold": 0.8,
+        "titleSimilarity": 0.875,
+        "lineupJaccard": 0.4,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "f97f6f",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Xanadu",
+      "partyNight": "2026-08-09",
+      "a": {
+        "title": "Sunday Afterglow (skate)",
+        "startMs": 1786291200000,
+        "startNY": "2026-08-09 12:00",
+        "lineup": [],
+        "priceMinCents": 1339,
+        "source": "dice"
+      },
+      "b": {
+        "title": "Sunday Skate Club: Dominican Day feat. Charlie Chimi (skate all night)",
+        "startMs": 1786320000000,
+        "startNY": "2026-08-09 20:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.1569,
+        "threshold": 0.9,
+        "titleSimilarity": 0.2241,
+        "lineupJaccard": null,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "372485",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Xanadu",
+      "partyNight": "2026-08-23",
+      "a": {
+        "title": "Sunday Skate Club feat. Love Games with Lauren Murada, Finn Jones, Party Dad,",
+        "startMs": 1787529600000,
+        "startNY": "2026-08-23 20:00",
+        "lineup": [
+          "Lauren Murada",
+          "Finn Jones",
+          "Party Dad",
+          "Andrew Lenox"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Sunday Afterglow (skate)",
+        "startMs": 1787500800000,
+        "startNY": "2026-08-23 12:00",
+        "lineup": [],
+        "priceMinCents": 1339,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.1105,
+        "threshold": 0.9,
+        "titleSimilarity": 0.1579,
+        "lineupJaccard": null,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "9fc385",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "TV EYE",
+      "partyNight": "2026-08-22",
+      "a": {
+        "title": "Music for the Masses",
+        "startMs": 1787454000000,
+        "startNY": "2026-08-22 23:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Music For The Masses: Dark 80s New Wave Nite",
+        "startMs": 1787454000000,
+        "startNY": "2026-08-22 23:00",
+        "lineup": [],
+        "priceMinCents": 1133,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6333,
+        "threshold": 0.9,
+        "titleSimilarity": 0.4762,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "e18a12",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "Sunset Latin & Reggaeton Yacht Party - Avalon Yacht - August 1",
+        "startMs": 1785619800000,
+        "startNY": "2026-08-01 17:30",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "SATURDAY MIDNIGHT ON THE HUDSON 08/01",
+        "startMs": 1785637800000,
+        "startNY": "2026-08-01 22:30",
+        "lineup": [],
+        "priceMinCents": 2318,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.0256,
+        "threshold": 0.9,
+        "titleSimilarity": 0.0366,
+        "lineupJaccard": null,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "8046c6",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Superior Ingredients",
+      "partyNight": "2026-08-02",
+      "a": {
+        "title": "Cécille Records with Nick Curly & Guests",
+        "startMs": 1785693600000,
+        "startNY": "2026-08-02 14:00",
+        "lineup": [
+          "Nick Curly",
+          "Harry Romero",
+          "Andrew Azara",
+          "Aazure"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Cécille Records w. Nick Curly, Harry Romero, Andrew Azara",
+        "startMs": 1785693600000,
+        "startNY": "2026-08-02 14:00",
+        "lineup": [
+          "Nick Curly",
+          "Harry Romero",
+          "Andrew Azara"
+        ],
+        "priceMinCents": 1523,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6667,
+        "threshold": 0.8,
+        "titleSimilarity": 0.4286,
+        "lineupJaccard": 0.75,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "995d5c",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Westlight Rooftop at The William Vale",
+      "partyNight": "2026-08-21",
+      "a": {
+        "title": "Friends In High Places feat. LAVERN",
+        "startMs": 1787346000000,
+        "startNY": "2026-08-21 17:00",
+        "lineup": [
+          "LAVERN"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Lavern - Friends In High Places",
+        "startMs": 1787346000000,
+        "startNY": "2026-08-21 17:00",
+        "lineup": [
+          "Lavern"
+        ],
+        "priceMinCents": 2999,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 1,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "466b2a",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "SILO",
+      "partyNight": "2026-08-15",
+      "a": {
+        "title": "Heat House: Summer Closing ft Naak",
+        "startMs": 1786849200000,
+        "startNY": "2026-08-15 23:00",
+        "lineup": [
+          "WEMI",
+          "Ohlei"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Heat House: Summer Closing ft. Naak / Wemi / Ohlei",
+        "startMs": 1786849200000,
+        "startNY": "2026-08-15 23:00",
+        "lineup": [
+          "Naak MusiQ",
+          "Wemi"
+        ],
+        "priceMinCents": 1700,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6065,
+        "threshold": 0.8,
+        "titleSimilarity": 0.75,
+        "lineupJaccard": 0.3333,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "90658f",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "SILO",
+      "partyNight": "2026-08-19",
+      "a": {
+        "title": "Open Decks with STEEN and Monkey Wrench Techno",
+        "startMs": 1787180400000,
+        "startNY": "2026-08-19 19:00",
+        "lineup": [
+          "STEEN",
+          "A DJ Named SNE"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Open Decks w/ Steen and Monkey Wrench Techno",
+        "startMs": 1787180400000,
+        "startNY": "2026-08-19 19:00",
+        "lineup": [],
+        "priceMinCents": 0,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 0.9378,
+        "threshold": 0.9,
+        "titleSimilarity": 0.9111,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "722197",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "EDMBoat.com - #1 EDM HOUSE SUNSET BOAT 2026",
+        "startMs": 1785621600000,
+        "startNY": "2026-08-01 18:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "HAUS ON HUDSON: SUNSET YACHT PARTY",
+        "startMs": 1785619800000,
+        "startNY": "2026-08-01 17:30",
+        "lineup": [],
+        "priceMinCents": 3477,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.3949,
+        "threshold": 0.9,
+        "titleSimilarity": 0.1356,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "f9d4fc",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Elsewhere",
+      "partyNight": "2026-07-31",
+      "a": {
+        "title": "Locklead, Lance Savali, DELACOUR, Amy Jor b2b Connie, Eavesdrop Records",
+        "startMs": 1785551400000,
+        "startNY": "2026-07-31 22:30",
+        "lineup": [
+          "Locklead",
+          "DELACOUR",
+          "Amy Jor",
+          "Connie",
+          "ANDI WALL"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Locklead, Lance Savali, DELACOUR, Amy Jor b2b Connie, Eavesdrop Records",
+        "startMs": 1785551400000,
+        "startNY": "2026-07-31 22:30",
+        "lineup": [
+          "Locklead",
+          "Lance Savali",
+          "Delacour"
+        ],
+        "priceMinCents": 4666,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.7037,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0.3333,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "869444",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Elsewhere",
+      "partyNight": "2026-08-08",
+      "a": {
+        "title": "Cuffing Season: OLEA, Esentrik, Arthur Tan, Okay Ivy, SINZ, Blesst + Goldie Harris & Friends",
+        "startMs": 1786242600000,
+        "startNY": "2026-08-08 22:30",
+        "lineup": [
+          "OLEA",
+          "SINZ"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Cuffing Season: OLEA, Esentrik, Arthur Tan, Okay Ivy, SINZ, Blesst + Goldie Harris & Friends",
+        "startMs": 1786242600000,
+        "startNY": "2026-08-08 22:30",
+        "lineup": [
+          "olea",
+          "eSenTRIK",
+          "Arthur Tan",
+          "Sinz",
+          "Goldie Harris",
+          "cuffing season"
+        ],
+        "priceMinCents": 4666,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.7037,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0.3333,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "f03d0c",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Xanadu",
+      "partyNight": "2026-08-23",
+      "a": {
+        "title": "Sunday Skate Club feat. Love Games with Lauren Murada, Finn Jones, Party Dad,",
+        "startMs": 1787529600000,
+        "startNY": "2026-08-23 20:00",
+        "lineup": [
+          "Lauren Murada",
+          "Finn Jones",
+          "Party Dad",
+          "Andrew Lenox"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Sunday Skate Club ft. Love Games w/ Lauren Murada, Finn Jones, Party Dad, Club Flush: Andrew Lenox (skate all night)",
+        "startMs": 1787529600000,
+        "startNY": "2026-08-23 20:00",
+        "lineup": [
+          "Lauren Murada",
+          "Finn Jones"
+        ],
+        "priceMinCents": 1854,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6413,
+        "threshold": 0.8,
+        "titleSimilarity": 0.6489,
+        "lineupJaccard": 0.5,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "ada3c8",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Elsewhere",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "Uffie (DJ Set) + CFCF (DJ Set), Doecaine, CLUB VS TRANCE + more",
+        "startMs": 1785637800000,
+        "startNY": "2026-08-01 22:30",
+        "lineup": [
+          "Uffie",
+          "Malcolm XL",
+          "Soo Intoit",
+          "Aster"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Uffie (DJ Set) + CFCF (DJ Set), Doecaine, CLUB VS TRANCE + more",
+        "startMs": 1785637800000,
+        "startNY": "2026-08-01 22:30",
+        "lineup": [
+          "Uffie",
+          "CFCF",
+          "katmoji",
+          "Soo Intoit",
+          "Traps n Trees",
+          "Hideyoshi.V94"
+        ],
+        "priceMinCents": 4666,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6667,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0.25,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "8e53f3",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "public records",
+      "partyNight": "2026-08-07",
+      "a": {
+        "title": "Truncate, Shanti / Tornado Wallace, CAMILLA / Patrick Russell",
+        "startMs": 1786158000000,
+        "startNY": "2026-08-07 23:00",
+        "lineup": [
+          "Truncate",
+          "Tornado Wallace",
+          "Camilla",
+          "Patrick Russell"
+        ],
+        "priceMinCents": 2163,
+        "source": "dice"
+      },
+      "b": {
+        "title": "Truncate, Shanti / Tornado Wallace, CAMILLA / Patrick Russell",
+        "startMs": 1786158000000,
+        "startNY": "2026-08-07 23:00",
+        "lineup": [
+          "Truncate",
+          "Shanti",
+          "Tornado Wallace",
+          "CAMILLA",
+          "Patrick Russell"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 0.9111,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0.8,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "2e96d9",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "The Meadows",
+      "partyNight": "2026-08-08",
+      "a": {
+        "title": "Reggaeton Throwbacks (21+)",
+        "startMs": 1786244400000,
+        "startNY": "2026-08-08 23:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Reggaeton Throwbacks  (21+)",
+        "startMs": 1786244400000,
+        "startNY": "2026-08-08 23:00",
+        "lineup": [],
+        "priceMinCents": 0,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.9,
+        "titleSimilarity": 1,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "ee4c57",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Pier 78 at Hudson River Park",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "NYC #1 LATIN & REGGAETON Sunset Yacht Cruise Boat Party",
+        "startMs": 1785618000000,
+        "startNY": "2026-08-01 17:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "SPHYNX Boat Party [House Music Night Sail]",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [],
+        "priceMinCents": 3245,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.1346,
+        "threshold": 0.9,
+        "titleSimilarity": 0.1923,
+        "lineupJaccard": null,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "33c901",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Pier 78 at Hudson River Park",
+      "partyNight": "2026-08-14",
+      "a": {
+        "title": "House Matters: FATSYNC Boat Party",
+        "startMs": 1786759200000,
+        "startNY": "2026-08-14 22:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "FATSYNC Boat Party",
+        "startMs": 1786759200000,
+        "startNY": "2026-08-14 22:00",
+        "lineup": [],
+        "priceMinCents": 3966,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.703,
+        "threshold": 0.9,
+        "titleSimilarity": 0.5758,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "7c08fb",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Drom",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "THE HUSTLE (70's DISCO NIGHT)",
+        "startMs": 1785639600000,
+        "startNY": "2026-08-01 23:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "The Hustle: 70s Disco Dance Party",
+        "startMs": 1785639600000,
+        "startNY": "2026-08-01 23:00",
+        "lineup": [],
+        "priceMinCents": 1133,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6244,
+        "threshold": 0.9,
+        "titleSimilarity": 0.4634,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "edd328",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Magic Hour Rooftop Bar",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "JAKKED AT LYRA",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Lyra Rooftop Party - 08.01",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [],
+        "priceMinCents": 2265,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.4029,
+        "threshold": 0.9,
+        "titleSimilarity": 0.1471,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "e1cf3e",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Jupiter Disco",
+      "partyNight": "2026-07-30",
+      "a": {
+        "title": "Tromac, JaySwann, dj unt.il",
+        "startMs": 1785452400000,
+        "startNY": "2026-07-30 19:00",
+        "lineup": [
+          "Tromac",
+          "JaySwann",
+          "dj unt.il"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Tromac, JaySwann, dj until",
+        "startMs": 1785463200000,
+        "startNY": "2026-07-30 22:00",
+        "lineup": [
+          "Tromac",
+          "DJ Unt.il"
+        ],
+        "priceMinCents": 0,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6157,
+        "threshold": 0.8,
+        "titleSimilarity": 0.8214,
+        "lineupJaccard": 0.6667,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "5fda3c",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "SILO",
+      "partyNight": "2026-08-14",
+      "a": {
+        "title": "Torren Foot / QLANK",
+        "startMs": 1786759200000,
+        "startNY": "2026-08-14 22:00",
+        "lineup": [
+          "Torren Foot"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Torren Foot / QLANK",
+        "startMs": 1786759200000,
+        "startNY": "2026-08-14 22:00",
+        "lineup": [
+          "TORREN FØØT",
+          "Qlank"
+        ],
+        "priceMinCents": 1700,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5556,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "61f601",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "SILO",
+      "partyNight": "2026-08-20",
+      "a": {
+        "title": "VHS F2F (Main Room Event, Free with RSVP)",
+        "startMs": 1787274000000,
+        "startNY": "2026-08-20 21:00",
+        "lineup": [
+          "Maha Kuma",
+          "Sami",
+          "y2aura",
+          "NIJEII",
+          "SUDDEN DEATH",
+          "Sam Valle",
+          "SHRAY",
+          "STARLOTTE"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "VHS F2F (Main Room Event)",
+        "startMs": 1787274000000,
+        "startNY": "2026-08-20 21:00",
+        "lineup": [],
+        "priceMinCents": 1133,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.7541,
+        "threshold": 0.9,
+        "titleSimilarity": 0.6486,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "7f4159",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-08",
+      "a": {
+        "title": "EDMBoat.com - #1 EDM HOUSE SUNSET BOAT 2026",
+        "startMs": 1786226400000,
+        "startNY": "2026-08-08 18:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Caribbean Vibes Weekly Party Yacht Cruises NYC",
+        "startMs": 1786244400000,
+        "startNY": "2026-08-08 23:00",
+        "lineup": [],
+        "priceMinCents": 2833,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.0089,
+        "threshold": 0.9,
+        "titleSimilarity": 0.0127,
+        "lineupJaccard": null,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "cbbc80",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-07-31",
+      "a": {
+        "title": "Reggaeton Boat Party NYC - Avalon Yacht",
+        "startMs": 1785551400000,
+        "startNY": "2026-07-31 22:30",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "FRIDAY MIDNIGHT ON THE HUDSON 07/31",
+        "startMs": 1785551400000,
+        "startNY": "2026-07-31 22:30",
+        "lineup": [],
+        "priceMinCents": 3477,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.32,
+        "threshold": 0.9,
+        "titleSimilarity": 0.0286,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "15f0f2",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Jupiter Disco",
+      "partyNight": "2026-07-31",
+      "a": {
+        "title": "DAYTIMERS NYC: SRI, mojamid, Prem, Swank, Krithi",
+        "startMs": 1785538800000,
+        "startNY": "2026-07-31 19:00",
+        "lineup": [
+          "SRI (1)",
+          "Swank (NYC)",
+          "Krithi"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "SRI, mojamid, Prem, Swank, Krithi",
+        "startMs": 1785538800000,
+        "startNY": "2026-07-31 19:00",
+        "lineup": [
+          "Krithi"
+        ],
+        "priceMinCents": 1133,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5771,
+        "threshold": 0.8,
+        "titleSimilarity": 0.6744,
+        "lineupJaccard": 0.3333,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "b4fbb8",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Pacha New York",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "Alok presents Rave The World",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [
+          "Alok"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Alok",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [
+          "Alok"
+        ],
+        "priceMinCents": 23871,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.7083,
+        "threshold": 0.8,
+        "titleSimilarity": 0.25,
+        "lineupJaccard": 1,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "faca64",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Pier 78 at Hudson River Park",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "House Matters: SPHYNX Boat Party [house music night sail]",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "SPHYNX Boat Party [House Music Night Sail]",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [],
+        "priceMinCents": 3245,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.8957,
+        "threshold": 0.9,
+        "titleSimilarity": 0.8511,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "2ed8f1",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "public records",
+      "partyNight": "2026-08-16",
+      "a": {
+        "title": "The Nursery: Love Injection, Kamma & Masalo",
+        "startMs": 1786906800000,
+        "startNY": "2026-08-16 15:00",
+        "lineup": [
+          "Love Injection",
+          "Kamma",
+          "Masalo",
+          "Kamma",
+          "Masalo"
+        ],
+        "priceMinCents": 2163,
+        "source": "dice"
+      },
+      "b": {
+        "title": "The Nursery: Love Injection, Kamma & Masalo",
+        "startMs": 1786906800000,
+        "startNY": "2026-08-16 15:00",
+        "lineup": [
+          "Love Injection",
+          "Kamma",
+          "Masalo"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 1,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "6baa13",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-15",
+      "a": {
+        "title": "EDMBoat.com - #1 EDM HOUSE SUNSET BOAT 2026",
+        "startMs": 1786831200000,
+        "startNY": "2026-08-15 18:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Caribbean Vibes Weekly Party Yacht Cruises NYC",
+        "startMs": 1786849200000,
+        "startNY": "2026-08-15 23:00",
+        "lineup": [],
+        "priceMinCents": 2833,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.0089,
+        "threshold": 0.9,
+        "titleSimilarity": 0.0127,
+        "lineupJaccard": null,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "fdd67f",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "SILO",
+      "partyNight": "2026-08-15",
+      "a": {
+        "title": "Omar ؏",
+        "startMs": 1786831200000,
+        "startNY": "2026-08-15 18:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Omar ؏",
+        "startMs": 1786831200000,
+        "startNY": "2026-08-15 18:00",
+        "lineup": [
+          "Omar ؏"
+        ],
+        "priceMinCents": 2400,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.9,
+        "titleSimilarity": 1,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "423670",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Sunset Park Rooftop",
+      "partyNight": "2026-08-07",
+      "a": {
+        "title": "Teksupport: Carlita (extended set) SOLD OUT",
+        "startMs": 1786158000000,
+        "startNY": "2026-08-07 23:00",
+        "lineup": [
+          "Carlita"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Teksupport: Carlita (extended set) SOLD OUT",
+        "startMs": 1786158000000,
+        "startNY": "2026-08-07 23:00",
+        "lineup": [
+          "Carlita"
+        ],
+        "priceMinCents": null,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 1,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "4ba54b",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "public records",
+      "partyNight": "2026-08-09",
+      "a": {
+        "title": "The Nursery: Diva Diva w/ Grace Sands, The Carry Nation, Saia & Sevyn Love, Keith Lawrence",
+        "startMs": 1786302000000,
+        "startNY": "2026-08-09 15:00",
+        "lineup": [
+          "Grace Sands",
+          "The Carry Nation",
+          "Saia",
+          "Sevyn Love"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "The Nursery: Diva Diva w/ Grace Sands, The Carry Nation, Saia & Sevyn Love, Keith Lawrence [Viola]",
+        "startMs": 1786302000000,
+        "startNY": "2026-08-09 15:00",
+        "lineup": [
+          "The Carry Nation",
+          "sevyn love",
+          "Keith Lawrence"
+        ],
+        "priceMinCents": 2163,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.7009,
+        "threshold": 0.8,
+        "titleSimilarity": 0.9167,
+        "lineupJaccard": 0.4,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "c35bc3",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "public records",
+      "partyNight": "2026-08-13",
+      "a": {
+        "title": "Joker",
+        "startMs": 1786674600000,
+        "startNY": "2026-08-13 22:30",
+        "lineup": [
+          "Joker"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "salt district mayor presents Taiwan Vinyl Night with vicki huang [UPSTAIRS]",
+        "startMs": 1786665600000,
+        "startNY": "2026-08-13 20:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.075,
+        "threshold": 0.9,
+        "titleSimilarity": 0,
+        "lineupJaccard": null,
+        "startProximity": 0.25,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "151b83",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Pier 78 at Hudson River Park",
+      "partyNight": "2026-08-22",
+      "a": {
+        "title": "R&B on the River - Sunset Boat Party Yacht Cruise",
+        "startMs": 1787432400000,
+        "startNY": "2026-08-22 17:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Disco & House NYC Sunset Cruise Day Party",
+        "startMs": 1787432400000,
+        "startNY": "2026-08-22 17:00",
+        "lineup": [
+          "DJ eh",
+          "Branqueeno",
+          "Bustin' Loose",
+          "Roland",
+          "Brother Rich",
+          "Sarindipity",
+          "Smurfo"
+        ],
+        "priceMinCents": 3966,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5188,
+        "threshold": 0.9,
+        "titleSimilarity": 0.3125,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "5d5c81",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "The Meadows",
+      "partyNight": "2026-08-22",
+      "a": {
+        "title": "Perreo Meets Techno (21+)",
+        "startMs": 1787454000000,
+        "startNY": "2026-08-22 23:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Perreo Meets Techno (21+)",
+        "startMs": 1787454000000,
+        "startNY": "2026-08-22 23:00",
+        "lineup": [],
+        "priceMinCents": 0,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.9,
+        "titleSimilarity": 1,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "f339d6",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "The Meadows",
+      "partyNight": "2026-08-08",
+      "a": {
+        "title": "Reggaeton Throwbacks (21+)",
+        "startMs": 1786244400000,
+        "startNY": "2026-08-08 23:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "REGGAETON OPEN BAR  (21+)",
+        "startMs": 1786244400000,
+        "startNY": "2026-08-08 23:00",
+        "lineup": [],
+        "priceMinCents": 2000,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5758,
+        "threshold": 0.9,
+        "titleSimilarity": 0.3939,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "469007",
+      "label": "SAME",
+      "uncertain": true,
+      "venue": "Knockdown Center",
+      "partyNight": "2026-08-07",
+      "a": {
+        "title": "Charlotte de Witte",
+        "startMs": 1786154400000,
+        "startNY": "2026-08-07 22:00",
+        "lineup": [
+          "Charlotte de Witte"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Claude VonStroke in The Ruins",
+        "startMs": 1786129200000,
+        "startNY": "2026-08-07 15:00",
+        "lineup": [
+          "Claude Vonstroke"
+        ],
+        "priceMinCents": 3817,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.0173,
+        "threshold": 0.8,
+        "titleSimilarity": 0.0444,
+        "lineupJaccard": 0,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "003aae",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "TV EYE",
+      "partyNight": "2026-08-14",
+      "a": {
+        "title": "Neon Soul [Modern Soul, Groove & Funk]",
+        "startMs": 1786762800000,
+        "startNY": "2026-08-14 23:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Neon Soul [Modern Soul, Groove & Funk]",
+        "startMs": 1786762800000,
+        "startNY": "2026-08-14 23:00",
+        "lineup": [],
+        "priceMinCents": 1133,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.9,
+        "titleSimilarity": 1,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "48cea9",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "C'mon Everybody",
+      "partyNight": "2026-07-31",
+      "a": {
+        "title": "SUPERSTRUCTURE",
+        "startMs": 1785549600000,
+        "startNY": "2026-07-31 22:00",
+        "lineup": [],
+        "priceMinCents": 3348,
+        "source": "dice"
+      },
+      "b": {
+        "title": "Superstructure",
+        "startMs": 1785549600000,
+        "startNY": "2026-07-31 22:00",
+        "lineup": [
+          "Scotia",
+          "Ushka"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.9,
+        "titleSimilarity": 1,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "41b26f",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Westlight Rooftop at The William Vale",
+      "partyNight": "2026-08-07",
+      "a": {
+        "title": "Shallou (DJ Set) - Friends In High Places",
+        "startMs": 1786136400000,
+        "startNY": "2026-08-07 17:00",
+        "lineup": [
+          "Shallou"
+        ],
+        "priceMinCents": 2999,
+        "source": "dice"
+      },
+      "b": {
+        "title": "Friends In High Places feat. Shallou",
+        "startMs": 1786136400000,
+        "startNY": "2026-08-07 17:00",
+        "lineup": [
+          "Shallou"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 0.9369,
+        "threshold": 0.8,
+        "titleSimilarity": 0.8378,
+        "lineupJaccard": 1,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "c9de59",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Sunset Park Rooftop",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "Teksupport: Miguelle & Tons (open to close)",
+        "startMs": 1785639600000,
+        "startNY": "2026-08-01 23:00",
+        "lineup": [
+          "Miguelle",
+          "Tons"
+        ],
+        "priceMinCents": 7272,
+        "source": "dice"
+      },
+      "b": {
+        "title": "Teksupport: Miguelle & TONS (open to close)",
+        "startMs": 1785639600000,
+        "startNY": "2026-08-01 23:00",
+        "lineup": [
+          "Miguelle",
+          "TONS"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 1,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "5cc23f",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Jupiter Disco",
+      "partyNight": "2026-08-22",
+      "a": {
+        "title": "Mickey Perez All Night",
+        "startMs": 1787450400000,
+        "startNY": "2026-08-22 22:00",
+        "lineup": [
+          "Mickey Perez"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Mickey Perez All Night",
+        "startMs": 1787450400000,
+        "startNY": "2026-08-22 22:00",
+        "lineup": [
+          "Mickey Pérez"
+        ],
+        "priceMinCents": 1133,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5556,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "efdc1c",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Pier 78 at Hudson River Park",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "House Music on the Hudson Boat Party Yacht Cruise NYC",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "SPHYNX Boat Party [House Music Night Sail]",
+        "startMs": 1785636000000,
+        "startNY": "2026-08-01 22:00",
+        "lineup": [],
+        "priceMinCents": 3245,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5652,
+        "threshold": 0.9,
+        "titleSimilarity": 0.3788,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "b47016",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "public records",
+      "partyNight": "2026-08-02",
+      "a": {
+        "title": "The Nursery: Soul Summit All Day Long",
+        "startMs": 1785697200000,
+        "startNY": "2026-08-02 15:00",
+        "lineup": [
+          "Soul Summit Music"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "The Nursery: Soul Summit All Day Long",
+        "startMs": 1785697200000,
+        "startNY": "2026-08-02 15:00",
+        "lineup": [
+          "Soul Summit"
+        ],
+        "priceMinCents": 2678,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5556,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "52c3ea",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "Sunset Latin & Reggaeton Yacht Party - Avalon Yacht - August 1",
+        "startMs": 1785619800000,
+        "startNY": "2026-08-01 17:30",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "HAUS ON HUDSON: SUNSET YACHT PARTY",
+        "startMs": 1785619800000,
+        "startNY": "2026-08-01 17:30",
+        "lineup": [],
+        "priceMinCents": 3477,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5295,
+        "threshold": 0.9,
+        "titleSimilarity": 0.3279,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "2495c5",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Pier 78 at Hudson River Park",
+      "partyNight": "2026-07-31",
+      "a": {
+        "title": "House Matters: Sam Allan Boat Party [ house music on the Hudson ]",
+        "startMs": 1785549600000,
+        "startNY": "2026-07-31 22:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "House Matters: Sam Allan’s Birthday Celebration Continuation!",
+        "startMs": 1785549600000,
+        "startNY": "2026-07-31 22:00",
+        "lineup": [
+          "Sam Allan"
+        ],
+        "priceMinCents": 3500,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5275,
+        "threshold": 0.9,
+        "titleSimilarity": 0.325,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "efdd3a",
+      "label": "DISTINCT",
+      "uncertain": false,
+      "venue": "Skyport Marina",
+      "partyNight": "2026-08-01",
+      "a": {
+        "title": "EDMBoat.com - #1 EDM HOUSE SUNSET BOAT 2026",
+        "startMs": 1785621600000,
+        "startNY": "2026-08-01 18:00",
+        "lineup": [],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Caribbean Vibes Weekly Party Yacht Cruises NYC",
+        "startMs": 1785639600000,
+        "startNY": "2026-08-01 23:00",
+        "lineup": [],
+        "priceMinCents": 2833,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.0089,
+        "threshold": 0.9,
+        "titleSimilarity": 0.0127,
+        "lineupJaccard": null,
+        "startProximity": 0,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "f02478",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Brooklyn Army Terminal",
+      "partyNight": "2026-08-15",
+      "a": {
+        "title": "Teksupport: Cloonee (Hellbent)",
+        "startMs": 1786824000000,
+        "startNY": "2026-08-15 16:00",
+        "lineup": [
+          "Cloonee"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Teksupport: Cloonee + more  (Hellbent)",
+        "startMs": 1786824000000,
+        "startNY": "2026-08-15 16:00",
+        "lineup": [
+          "Cloonee",
+          "Ilario Alicante",
+          "Elliot Schooling",
+          "Liam Palmer"
+        ],
+        "priceMinCents": 9064,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.6077,
+        "threshold": 0.8,
+        "titleSimilarity": 0.8485,
+        "lineupJaccard": 0.25,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "3bd855",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "public records",
+      "partyNight": "2026-07-31",
+      "a": {
+        "title": "Ana Rs, Henry Chow / John Tejada, e-Lite / Jesse Dorris",
+        "startMs": 1785553200000,
+        "startNY": "2026-07-31 23:00",
+        "lineup": [
+          "Ana Rs",
+          "Henry Chow",
+          "John Tejada",
+          "e-Lite"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Ana Rs, Henry Chow / John Tejada, e-Lite / Jesse Dorris",
+        "startMs": 1785553200000,
+        "startNY": "2026-07-31 23:00",
+        "lineup": [
+          "Ana Rs",
+          "Henry Chow",
+          "John Tejada"
+        ],
+        "priceMinCents": 3193,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 0.8889,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 0.75,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "2e1496",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Xanadu",
+      "partyNight": "2026-08-02",
+      "a": {
+        "title": "Sunday Skate Club: RIDE THE SPACESHIP ft. Sebastian Posso, LivBpm, Malachi, & auden barbour  (skate all night)",
+        "startMs": 1785715200000,
+        "startNY": "2026-08-02 20:00",
+        "lineup": [],
+        "priceMinCents": 1082,
+        "source": "dice"
+      },
+      "b": {
+        "title": "Sunday Skate Club: RIDE THE SPACESHIP ft. Sebastian Posso, LivBpm, Malachi, & auden barbour ",
+        "startMs": 1785715200000,
+        "startNY": "2026-08-02 20:00",
+        "lineup": [
+          "Sebastian Posso",
+          "LivBpm",
+          "Malachi (2)"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 0.9308,
+        "threshold": 0.9,
+        "titleSimilarity": 0.9011,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "9b3148",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "public records",
+      "partyNight": "2026-08-23",
+      "a": {
+        "title": "The Nursery: Gerd Janson, Ron Like Hell",
+        "startMs": 1787511600000,
+        "startNY": "2026-08-23 15:00",
+        "lineup": [
+          "Gerd Janson",
+          "Ron Like Hell"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "The Nursery: Gerd Janson, Ron Like Hell",
+        "startMs": 1787511600000,
+        "startNY": "2026-08-23 15:00",
+        "lineup": [
+          "Gerd Janson",
+          "Ron Like Hell"
+        ],
+        "priceMinCents": 2163,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 1,
+        "threshold": 0.8,
+        "titleSimilarity": 1,
+        "lineupJaccard": 1,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "956ee0",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "Superior Ingredients",
+      "partyNight": "2026-08-23",
+      "a": {
+        "title": "AC Slater w. Chinonegro, Facu Baez & Guests",
+        "startMs": 1787508000000,
+        "startNY": "2026-08-23 14:00",
+        "lineup": [
+          "AC Slater",
+          "Chinonegro",
+          "Boy Sanders",
+          "Riva",
+          "Bianca"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "AC Slater w. Chinonegro, Facu Baez & More",
+        "startMs": 1787508000000,
+        "startNY": "2026-08-23 14:00",
+        "lineup": [
+          "AC Slater"
+        ],
+        "priceMinCents": 2337,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "separate",
+        "score": 0.5407,
+        "threshold": 0.8,
+        "titleSimilarity": 0.7333,
+        "lineupJaccard": 0.2,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    },
+    {
+      "pairId": "8cac99",
+      "label": "SAME",
+      "uncertain": false,
+      "venue": "SILO",
+      "partyNight": "2026-08-12",
+      "a": {
+        "title": "Open Decks with STEEN and Rhythm Rails",
+        "startMs": 1786575600000,
+        "startNY": "2026-08-12 19:00",
+        "lineup": [
+          "STEEN"
+        ],
+        "priceMinCents": null,
+        "source": "ra"
+      },
+      "b": {
+        "title": "Open Decks w/ Steen and Rhythm Rails",
+        "startMs": 1786575600000,
+        "startNY": "2026-08-12 19:00",
+        "lineup": [],
+        "priceMinCents": 0,
+        "source": "dice"
+      },
+      "shipped": {
+        "outcome": "merged-scored",
+        "score": 0.9054,
+        "threshold": 0.9,
+        "titleSimilarity": 0.8649,
+        "lineupJaccard": null,
+        "startProximity": 1,
+        "priceProximity": null
+      }
+    }
+  ]
+}
