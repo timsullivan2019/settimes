@@ -44,6 +44,13 @@ describe("parseLocal", () => {
     expect(() => parseLocal("")).toThrow(/unparseable/);
   });
 
+  it("throws on date-only input rather than defaulting to midnight", () => {
+    expect(() => parseLocal("2026-08-14")).toThrow(/date-only/);
+    expect(() => parseLocal("  2026-08-14  ")).toThrow(/date-only/);
+    // A date WITH a midnight time is explicit and stays allowed.
+    expect(parseLocal("2026-08-14T00:00:00").toISO()).toBe("2026-08-14T00:00:00.000-04:00");
+  });
+
   describe("November 2026 DST boundary (fall back, Nov 1)", () => {
     it("takes the FIRST occurrence of an ambiguous 1:30am", () => {
       // 1:30am happens at EDT (-04:00) and again at EST (-05:00).

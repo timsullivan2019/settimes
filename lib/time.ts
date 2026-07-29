@@ -57,6 +57,13 @@ function resolveNaive(wall: DateTime, zoneName: string): DateTime {
  * - Unparseable input throws — never invent data.
  */
 export function parseLocal(input: string, sourceTz: string = NY_TZ): DateTime {
+  // A bare date would parse as midnight, and midnight minus 6h puts
+  // party_night on the previous day — every event silently one day early.
+  if (/^\d{4}-\d{2}-\d{2}$/.test(input.trim())) {
+    throw new Error(
+      `parseLocal: date-only input ${JSON.stringify(input)} — combine with a time first`,
+    );
+  }
   const asUtc = parseWith(input, "utc");
   const asShifted = parseWith(input, "utc+2");
   if (!asUtc.isValid || !asShifted.isValid) {
